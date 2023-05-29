@@ -35,6 +35,10 @@ const Slider = ({desktop = 4, mobile = 1}) => {
 		}
 	}, [baseData, cnt])
 
+	useEffect(() => {
+        console.log(gds)
+    }, [gds])
+
 	return <Container style={{gridTemplateColumns: "1fr"}}>
 							<Carousel controls={false} interval={5000} indicators={false}>
 									{gds.map((el, i) => <Carousel.Item key={i}>
