@@ -3,11 +3,12 @@ import {useNavigate, Link} from "react-router-dom";
 import {Button, Container, Row, Col, Figure} from "react-bootstrap";
 import UpdatedInput from "../components/UpdatedInput";
 import Ctx from "../Ctx";
+import BsCard from "../components/BsCard";
 
 
 const Profile = ({setUser}) => {
 	const navigate = useNavigate()
-	const { api } = useContext(Ctx);
+	const { api, baseData } = useContext(Ctx);
 	const [userData, setUserData] = useState({})
 	const [inpName, setInpName] = useState(false);
 	const [inpEmail, setInpEmail] = useState(false);
@@ -15,9 +16,12 @@ const Profile = ({setUser}) => {
 	const [inpAvatar, setInpAvatar] = useState(false);
 	
 	const updUser = (name, val) => {
-				let body = {...userData}
-				if (name !== "avatar") {
-					delete body.avatar;
+				let body = {
+					name: userData.name, 
+					about: userData.about
+				}
+				if (name === "avatar") {
+					body = {avatar: userData.avatar};
 				}
 				body[name] = val;
 				api.updAdmin(body, name === "avatar").then(data => setUserData(data));
@@ -34,57 +38,59 @@ const Profile = ({setUser}) => {
 						setUserData(data);
 				})
 	}, [])
-	return <>
-		<Container style={{gridTemplateColumns: "1fr"}} className="px-0">
-				<Row>
-						{userData?.name && <>
-								<Col xs={12} sm={6}>
-										<h1>Личный кабинет</h1>
-										<div><UpdatedInput
-													val={userData.name}
-													isActive={inpName}
-													changeActive={setInpName}
-													upd={updUser}
-													name="name"
-										/></div>
-										<div><UpdatedInput
-													val={userData.email}
-													isActive={inpEmail}
-													changeActive={setInpEmail}
-													upd={updUser}
-													name="email"
-										/></div>
-										<div><UpdatedInput
-													val={userData.about}
-													isActive={inpAbout}
-													changeActive={setInpAbout}
-													upd={updUser}
-													name="about"
-										/></div>
-							</Col>
-							<Col xs={12} sm={6}>
-									<Figure>
-											<Figure.Image
-													src={userData.avatar}
-													alt={userData.email}
-											/>
-											<Figure.Caption>
-												<UpdatedInput 
-														val={userData.avatar} 
-														isActive={inpAvatar}
-														changeActive={setInpAvatar}
-														upd={updUser}
-														name="avatar"
-												/>
-											</Figure.Caption>
-									</Figure>
-							</Col>
-						</>}
-					</Row>
+return <>
+	<Container style={{gridTemplateColumns: "1fr"}} className="px-0">
+		<Row>
+			{userData?.name && <>
+				<Col xs={12} sm={6}>
+					<h1>Личный кабинет</h1>
+					<div><UpdatedInput
+						val={userData.name}
+						isActive={inpName}
+						changeActive={setInpName}
+						upd={updUser}
+						name="name"
+					/></div>
+					<div className="py-3">{userData.email}</div>
+					<div><UpdatedInput
+						val={userData.about}
+						isActive={inpAbout}
+						changeActive={setInpAbout}
+						upd={updUser}
+						name="about"
+					/></div>
+				</Col>
+				<Col xs={12} sm={6}>
+					<Figure>
+						<Figure.Image
+							src={userData.avatar}
+							alt={userData.email}
+						/>
+					<Figure.Caption>
+						<UpdatedInput 
+							val={userData.avatar} 
+							isActive={inpAvatar}
+							changeActive={setInpAvatar}
+							upd={updUser}
+							name="avatar"
+						/>
+					</Figure.Caption>
+						</Figure>
+				</Col>
+			</>}
+		</Row>
 			<Button variant="warning" as={Link} to="/add/product">Добавить товар</Button>
 			<br/>
 			<button onClick={logOut}>Выйти</button>
-			
+			<Row>
+				<Col sx={12}>
+					<h3>Мои товары</h3>
+				</Col>
+				{baseData.filter(el => el.author._id === userData._id)
+				.map(el => <Col xs={6} md={3} key={el._id}>
+					<BsCard {...el}/>
+				</Col>)}
+			</Row>
 		</Container>
 	</>
 }

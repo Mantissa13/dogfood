@@ -5,7 +5,7 @@ class Api {
 	}
 	setHeaders(isContentType = false) {
 		const headers = {
-			"Autorization": `Bearer ${this.token}`
+			"Authorization": `Bearer ${this.token}`
 		}
 		if (isContentType) {
 			headers["Content-Type"] = "application/json"

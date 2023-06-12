@@ -12,9 +12,17 @@ import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import AddProduct from "./pages/AddProduct";
 import Favorites from "./pages/Favorites";
+import Layout from "./components/Layout";
+import Basket from "./pages/Basket";
 
 const App = () => {
 	// const user = localStorage.getItem("user12");
+	let basketStore = localStorage.getItem("basket12");
+	if (basketStore && basketStore[0] === "[") {
+		basketStore = JSON.parse(basketStore);
+	} else {
+		basketStore = [];
+	}
 	const [user, setUser] = useState(localStorage.getItem("user12"));
 	const [userId, setUserId] = useState(localStorage.getItem("user12-id"));
 	const [token, setToken] = useState(localStorage.getItem("token12"));
@@ -22,7 +30,8 @@ const App = () => {
 	const [baseData, setBaseData] = useState([]);
 	const [goods, setGoods] = useState(baseData);
 	const [searchResult, setSearchResult] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
+	const [modalOpen, setModalOpen] = useState(false);
+	const [basket, setBasket] = useState(basketStore);
 
 	useEffect(() => {
 		if (user) {
@@ -35,6 +44,10 @@ const App = () => {
 			setToken(null);
 		}
 	}, [user])
+
+	useEffect(() => {
+		localStorage.setItem("basket12", JSON.stringify(basket));
+	}, [basket])
 
 	useEffect(() => {
 		setApi(new Api(token));
@@ -75,7 +88,9 @@ useEffect(() => {
 		setGoods,
 		userId,
 		token,
-		api
+		api,
+		basket,
+		setBasket
 }}>
 	<Header 
 			user={user} 
@@ -85,6 +100,7 @@ useEffect(() => {
 			setModalOpen={setModalOpen}
 	/>
 	<main>
+		<Layout>
 		<Routes>
 				<Route path="/" element={<Home user={user} setActive={setModalOpen}/>}/>
 				<Route path="/catalog" element={<Catalog 
@@ -103,10 +119,13 @@ useEffect(() => {
 
 				<Route path="/product/:id" element={<Product/>}/>
 				<Route path="/add/product" element={<AddProduct/>}/>
+				<Route path="/basket" element={<Basket/>}/>
 				<Route path="/favorites" element={<Favorites/>}/>
-		</Routes>	
+		</Routes>
+		</Layout>	
 	</main>
 			<Footer/>
+			
 			<Modal 
 					isActive={modalOpen} 
 					setIsActive={setModalOpen}
