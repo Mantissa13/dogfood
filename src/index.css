@@ -1,5 +1,6 @@
 :root {
-  font-size: 8px;
+  font-size: 10px;
+  font-weight: 300;
 }
 * {
   position: relative;
@@ -12,6 +13,10 @@ body {
   font-family: sans-serif;
   font-size: 2rem;
   margin: 0;
+}
+
+footer {
+  font-size: smaller;
 }
 
 #root {
@@ -66,16 +71,31 @@ p {
   font-weight: 600;
   text-shadow: 0 0 1px yellow;
   user-select: none;
-  width: 120px;
   height: 40px;
   background: white;
   border-radius: 25px;
   justify-content: center;
-  margin-left: 30px;
-  margin-bottom: 15px;
+  margin: 20px;
 }
 
 .info-link:hover {
+  text-shadow: 0 0 7px yellow;
+}
+.info-button {
+  cursor: pointer;
+  font-weight: 600;
+  text-shadow: 0 0 1px yellow;
+  text-decoration: underline;
+  user-select: none;
+  width: fit-content;
+  height: 40px;
+  padding: 0 10px;
+  line-height: 40px;
+  background: white;
+  border-radius: 25px;
+  justify-content: center;
+}
+.info-button:hover {
   text-shadow: 0 0 7px yellow;
 }
 
@@ -95,21 +115,20 @@ p {
 	background-position: center;
 	min-height: 300px;
 	max-height: 60vh;
+  border-radius: 20px;
 }
 .half {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 .half1 {
   background-image: url('assents/images/sale2.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 160px;
+  min-height: 200px;
   max-height: 60vh;
-  border-radius: 20px;
-  width: 400px;
   border-radius: 20px;
 }
 .half2 {
@@ -117,12 +136,16 @@ p {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 160px;
+  min-height: 200px;
   max-height: 60vh;
   border-radius: 20px;
-  width: 400px;
-  border-radius: 20px;
 }
+.buttonCenter {
+  font-size: medium;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
 
 @media (min-width: 576px) {
 .container {

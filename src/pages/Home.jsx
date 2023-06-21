@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {Image, Journals} from "react-bootstrap-icons";
+import {Journals} from "react-bootstrap-icons";
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
 import Slider from "../components/Slider";
@@ -9,7 +9,7 @@ import bannersData from "../assents/data/banners.json";
 
 const Home = ({user, setActive}) => {
 	return <>
-		<Layout mb={1} dt={2} gap="none">
+		<Layout mb={1} gap="none">
 			<div className="info bannerUpp">
 				<Banner {...bannersData[0]}/>
 				<div className="info-link">
@@ -19,25 +19,26 @@ const Home = ({user, setActive}) => {
 						</Link>}
 					
 					{!user && <>
-					<span className="info-link" onClick={() => setActive(true)}>Авторизуйтесь</span>, чтобы получить доступ к сайту</>}
+					<span className="info-button" onClick={() => setActive(true)}>Авторизуйтесь</span>, чтобы получить доступ к сайту</>}
 				</div>
 			</div>
 		</Layout>
-	<Layout mb={1} dt={2} gap="small">
+	<Layout mb={1} gap="small">
 		<div className="pic" />
 		
 	</Layout>
-	<Layout mb={1} dt={2} gap="small">
-		<Slider desktop={3} mobile={2}/>
+	<Layout mb={1} gap="small">
+		<Slider desktop={3} mobile={2} />
 	</Layout>
 	
-	<Layout mb={1} dt={2} gap="none">
-	<div className="half">
+	<Layout mb={1} dt={2} gap="small">
 			<div className="half1"/>
-			<div className="half2"/>
-		</div>
-	
-	
+			<div className="half2"/>	
+	</Layout>
+
+	<Layout mb={1} gap="small">
+		<div className="pic" />
+		
 	</Layout>
 
 </>

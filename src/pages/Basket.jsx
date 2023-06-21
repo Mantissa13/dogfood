@@ -75,7 +75,7 @@ const Basket = ({}) => {
 			<tfoot>
 				<tr>
 					<td colSpan={5} className="text-end text-uppercase">Общая сумма:</td>
-					<td className="fs-5 fw-bold">{sumDiscount === sum 
+					<td className="fs-3 fw-bold">{sumDiscount === sum 
 							? <span>{sum} ₽</span> 
 							: <>
 							<span className="text-danger">{Math.ceil(sumDiscount)} ₽</span>

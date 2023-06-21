@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from "react";
 import {useParams, Link, useNavigate} from "react-router-dom";
-import { Basket, Plus } from "react-bootstrap-icons";
+import { XSquare, Plus } from "react-bootstrap-icons";
 import { Container, Row, Col, Table, Card, Button, Form } from "react-bootstrap";
 import Ctx from "../Ctx";
 
@@ -68,8 +68,8 @@ const delHandler = () => {
 					
 						{data.name ? <>
 							<Col sm={12}>
-									<div>
-											{data.author._id === userId && <Basket onClick={delHandler}/>}
+									<div className="text-danger">
+											{data.author._id === userId && <XSquare onClick={delHandler}/>}
 									</div>
 									<h1>{data.name}</h1>
 							</Col>
@@ -119,10 +119,10 @@ const delHandler = () => {
 																</span>													
 												</span>
 												<Card.Title>{el.rating}</Card.Title>
-												<Card.Text className="fs-6 text-secondary">{el.text}</Card.Text>
+												<Card.Text className="fs-4 text-body">{el.text}</Card.Text>
 												
 												{el.author._id === userId && <span className="text-danger position-absolute end-0 bottom-0 pe-3 pb-3">
-													<Basket onClick={() => delReview(el._id)}/>
+													<XSquare onClick={() => delReview(el._id)}/>
 												</span>}
 												</Card.Body>
 											</Card>

@@ -79,15 +79,14 @@ return <>
 				</Col>
 			</>}
 		</Row>
-			<Button variant="warning" as={Link} to="/add/product">Добавить товар</Button>
+			<Button className="buttonCenter" variant="warning" as={Link} to="/add/product">Добавить товар</Button>
 			<br/>
-			<button onClick={logOut}>Выйти</button>
+			<button className="buttonCenter" onClick={logOut}>Выйти</button>
 			<Row>
-				<Col sx={12}>
+				<Col xs={12} className="py-4">
 					<h3>Мои товары</h3>
 				</Col>
-				{baseData.filter(el => el.author._id === userData._id)
-				.map(el => <Col xs={6} md={3} key={el._id}>
+				{baseData.filter(el => el.author._id === userData._id).map(el => <Col xs={6} md={3} key={el._id}>
 					<BsCard {...el}/>
 				</Col>)}
 			</Row>

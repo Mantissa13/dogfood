@@ -1,16 +1,18 @@
 .banner__caption {
-	font-size: 6rem;
+	font-size: 10rem;
 	font-weight: 800;
+	padding-left: 25px;
 }
 .banner__text {
-	font-size: 3rem;
+	font-size: 4rem;
 	font-weight: 600;
+	padding-left: 25px;
 }
 
 
 @media screen and (min-width: 1064px) {
 	.banner__caption {
-		font-size: 16rem;
+		font-size: 4rem;
 		}
 	.banner__text {
 		font-size: 2rem;
